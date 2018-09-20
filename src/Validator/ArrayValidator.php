@@ -14,8 +14,6 @@ class ArrayValidator
             Assertion::keyExists($rules, $field);
             array_map(
                 function ($validationRule) use ($value) : void {
-                    $method = null;
-                    $param = null;
                     $validation = explode(':', $validationRule);
 
                     list($method, $param) = (array_key_exists(1, $validation)
