@@ -41,3 +41,5 @@ ArrayValidator::check($params, $rules);
 // Now you can do something with known valid params.
 
 ```
+
+See more examples and options inner [docs](docs/index.md).
