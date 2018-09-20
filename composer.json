@@ -1,0 +1,24 @@
+{
+  "name": "kpicaza/array-validator",
+  "license": "LGPL-3.0",
+  "require": {
+    "php": "^7.1",
+    "beberlei/assert": "3.0.*"
+  },
+  "require-dev": {
+    "phpstan/phpstan": "0.9.*",
+    "phpspec/phpspec": "5.0.*",
+    "ciaranmcnulty/phpspec-typehintedmethods": "4.0.*",
+    "squizlabs/php_codesniffer": "3.3.*"
+  },
+  "autoload": {
+      "psr-4": {
+          "Validator\\": "src/Validator/"
+      }
+  },
+  "scripts": {
+    "style-check": "phpcs -p --standard=PSR2 --runtime-set ignore_errors_on_exit 1 --runtime-set ignore_warnings_on_exit 1 src",
+    "style-fix": "phpcbf -p --standard=PSR2 --runtime-set ignore_errors_on_exit 1 --runtime-set ignore_warnings_on_exit 1 src",
+    "inspect": "phpstan analyse -l 4 -c phpstan.neon src --ansi"
+  }
+}
