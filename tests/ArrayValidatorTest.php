@@ -1,25 +1,26 @@
 <?php
 
-namespace spec\Validator;
+declare(strict_types=1);
 
+namespace Tests\Validator;
+
+use PHPUnit\Framework\TestCase;
 use Validator\ArrayValidator;
-use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 
-class ArrayValidatorSpec extends ObjectBehavior
+class ArrayValidatorTest extends TestCase
 {
     const VALID_VALUES_1 = [
         'user_id' => 'SomeId',
         'email' => 'example@example.com',
         'name' => 'Mr Potato',
-        'descriptioarn' => 'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.'
+        'description' => 'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley.'
     ];
 
     const INVALID_VALUES_1 = [
         'user_id' => '',
         'email' => 'example@example.com',
         'name' => 'Mr Potato',
-        'descriptioarn' => 'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.'
+        'description' => 'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.'
     ];
 
     const INVALID_VALUES_1_2 = [
@@ -46,43 +47,42 @@ class ArrayValidatorSpec extends ObjectBehavior
     const RULES_1 = [
         'user_id' => 'notEmpty',
         'email' => 'notEmpty|email',
-        'name' => 'notEmpty|string|greaterThan:3|lessThan:120',
-        'description' => 'notEmpty|greaterThan:40'
+        'name' => 'notEmpty|string|minLength:3|maxLength:120',
+        'description' => 'notEmpty|minLength:40'
     ];
 
-    function it_should_do_nothing_with_valid_parameters()
+    function testShouldDoNothingWithValidParameters()
     {
-        $this->beConstructedThrough('check', [
-           self::VALID_VALUES_1,
-           self::RULES_1
-        ]);
+        ArrayValidator::check(self::VALID_VALUES_1, self::RULES_1);
+        $this->assertTrue(true);
     }
 
-    function it_should_thrown_an_exception_when_user_id_is_empty()
+    function testShouldThrownAnExceptionWhenUserIdIsEmpty()
     {
-        $this->shouldThrow(
-            \Throwable::class
-        )->during('check', self::INVALID_VALUES_1, self::RULES_1);
+        $this->expectException(\Throwable::class);
+
+        ArrayValidator::check(self::INVALID_VALUES_1, self::RULES_1);
     }
 
-    function it_should_thrown_an_exception_when_email_is_not_well_formed()
+    function testShouldThrownAnExceptionWhenEmailIsNotWellFormed()
     {
-        $this->shouldThrow(
-            \Throwable::class
-        )->during('check', self::INVALID_VALUES_1_2, self::RULES_1);
+        $this->expectException(\Throwable::class);
+
+        ArrayValidator::check(self::INVALID_VALUES_1_2, self::RULES_1);
     }
 
-    function it_should_thrown_an_exception_when_name_is_less_than_2()
+    function testShouldThrownAnExceptionWhenNameIsLessThan2()
     {
-        $this->shouldThrow(
-            \Throwable::class
-        )->during('check', self::INVALID_VALUES_1_3, self::RULES_1);
+        $this->expectException(\Throwable::class);
+
+        ArrayValidator::check(self::INVALID_VALUES_1_3, self::RULES_1);
     }
 
-    function it_should_thrown_an_exception_when_name_is_greater_than_120()
+    function testShouldThrownAnExceptionWhenNameIsGreaterThan120()
     {
-        $this->shouldThrow(
-            \Throwable::class
-        )->during('check', self::INVALID_VALUES_1_4, self::RULES_1);
+        $this->expectException(\Throwable::class);
+
+        ArrayValidator::check(self::INVALID_VALUES_1_4, self::RULES_1);
     }
+
 }

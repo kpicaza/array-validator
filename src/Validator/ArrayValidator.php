@@ -14,13 +14,13 @@ class ArrayValidator
             Assertion::keyExists($rules, $field);
             array_map(
                 function ($validationRule) use ($value) : void {
+                    $method = null;
+                    $param = null;
                     $validation = explode(':', $validationRule);
 
-                    list($method, $param) = array_key_exists(1, $validation)
-                        ? (-1 === strpos($validation[1], '.')
-                            ? $validation
-                            : explode('.', $validation[1]))
-                        : [$validation[0], null];
+                    list($method, $param) = (array_key_exists(1, $validation)
+                        ? [$validation[0], $validation[1]]
+                        : [$validation[0], null]);
 
                     call_user_func_array([Assertion::class, $method], [$value, $param]);
                 },
