@@ -1,5 +1,11 @@
 extensions:
-  Cjm\PhpSpec\Extension\TypeHintedMethodsExtension: ~
+  LeanPHP\PhpSpec\CodeCoverage\CodeCoverageExtension:
+    format:
+      - clover
+    whitelist:
+      - src/
+    output:
+      clover: coverage.xml
 
 suites:
   default: ~
