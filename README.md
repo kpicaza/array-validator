@@ -32,7 +32,7 @@ $params = [
     'user_id' => 'SomeId',
     'email' => 'example@example.com',
     'name' => 'Mr Potato',
-    'descriptioarn' => 'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.'
+    'description' => 'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.'
 ];
 
 // It should not do nothing, everything is correct here.
