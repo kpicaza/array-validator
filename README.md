@@ -18,6 +18,26 @@ composer require kpicaza/validation-rules
 ```php
 <?php
 
+use Validator\ArrayValidator;
 
+$rules = [
+    'user_id' => 'notEmpty',
+    'email' => 'notEmpty|email',
+    'name' => 'notEmpty|string|greaterThan:3|lessThan:120',
+    'description' => 'notEmpty|greaterThan:40'
+];
+
+// This is the array we want to validate
+$params = [
+    'user_id' => 'SomeId',
+    'email' => 'example@example.com',
+    'name' => 'Mr Potato',
+    'descriptioarn' => 'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.'
+];
+
+// It should not do nothing, everything is correct here.
+ArrayValidator::check($params, $rules);
+
+// Now you can do something with known valid params.
 
 ```
