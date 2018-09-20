@@ -15,6 +15,9 @@ class ArrayValidator
             array_map(
                 function ($validationRule) use ($value) : void {
                     $validation = explode(':', $validationRule);
+                    $method = null;
+                    $param1 = null;
+                    $param2 = null;
 
                     if (in_array($validation[0], RuleParser::RULES['multipleParams'])) {
                         $method = $validation[0];
@@ -31,7 +34,7 @@ class ArrayValidator
 
                     call_user_func_array(
                         [Assertion::class, $method],
-                        [$value, $param1, isset($param2) ? $param2 : null]
+                        [$value, $param1, $param2]
                     );
                 },
                 explode('|', $rules[$field])
