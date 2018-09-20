@@ -7,7 +7,7 @@ namespace Tests\Validator;
 use PHPUnit\Framework\TestCase;
 use Validator\ArrayValidator;
 
-class ArrayValidatorTest extends TestCase
+class ArrayValidatorSimpleValidationTest extends TestCase
 {
     const VALID_VALUES_1 = [
         'user_id' => 'SomeId',
