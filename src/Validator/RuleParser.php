@@ -95,14 +95,19 @@ class RuleParser
         ]
     ];
 
-    public static function getRule(string $rule, ?string $plainConstrains)
+    public static function getRuleMethod(string $assert): string
     {
-        $method = key(array_filter(
+        return key(array_filter(
             self::RULES,
-            function (array $availableRules) use ($rule): bool {
-                return in_array($rule, $availableRules);
+            function (array $availableRules) use ($assert): bool {
+                return in_array($assert, $availableRules);
             }
         ));
+    }
+
+    public static function getRule(string $rule, ?string $plainConstrains)
+    {
+        $method = self::getRuleMethod($rule);
 
         return call_user_func_array([self::class, $method], [$plainConstrains]);
     }

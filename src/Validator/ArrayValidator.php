@@ -15,30 +15,30 @@ class ArrayValidator
             array_map(
                 function ($validationRule) use ($value) : void {
                     $validation = explode(':', $validationRule);
-                    $method = null;
-                    $param1 = null;
-                    $param2 = null;
+                    $method = $validation[0];
+                    $params = array_key_exists(1, $validation) ? $validation[1] : null;
+                    $ruleMethod = self::getRuleParams($method,  $params);
 
-                    if (in_array($validation[0], RuleParser::RULES['multipleParams'])) {
-                        $method = $validation[0];
-                        list($param1, $param2) = RuleParser::getRule($validation[0], $validation[1]);
-                    }
+                    list($param1, $param2) = $ruleMethod[RuleParser::getRuleMethod($method)]($params);
 
-                    if (in_array($validation[0], RuleParser::RULES['singleParam'])) {
-                        $method = $validation[0];
-
-                        $param1 = array_key_exists(1, $validation)
-                            ? RuleParser::getRule($validation[0], $validation[1])
-                            : null;
-                    }
-
-                    call_user_func_array(
-                        [Assertion::class, $method],
-                        [$value, $param1, $param2]
-                    );
+                    call_user_func_array([Assertion::class, $method], [$value, $param1, $param2]);
                 },
                 explode('|', $rules[$field])
             );
         });
+    }
+
+    private static function getRuleParams(string $method, ?string $params): array {
+        return [
+            'singleParam' => function() use ($method, $params) {
+                return [
+                    $params ? RuleParser::getRule($method, $params) : null,
+                    null
+                ];
+            },
+            'multipleParams' => function() use ($method, $params) {
+                return RuleParser::getRule($method, $params);
+            },
+        ];
     }
 }
