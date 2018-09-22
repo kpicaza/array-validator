@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Validator;
 
+use InvalidArgumentException;
+
 class RuleParser
 {
     const RULES = [
@@ -97,12 +99,20 @@ class RuleParser
 
     public static function getRuleMethod(string $assert): string
     {
-        return key(array_filter(
+        $ruleMethod = key(array_filter(
             self::RULES,
             function (array $availableRules) use ($assert): bool {
                 return in_array($assert, $availableRules);
             }
         ));
+
+        if (null === $ruleMethod) {
+            throw new InvalidArgumentException(
+                'Given rule not found.'
+            );
+        }
+
+        return $ruleMethod;
     }
 
     public static function getRule(string $rule, ?string $plainConstrains)

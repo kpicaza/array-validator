@@ -24,6 +24,6 @@
   "scripts": {
     "style-check": "phpcs -p --standard=PSR2 --runtime-set ignore_errors_on_exit 1 --runtime-set ignore_warnings_on_exit 1 src",
     "style-fix": "phpcbf -p --standard=PSR2 --runtime-set ignore_errors_on_exit 1 --runtime-set ignore_warnings_on_exit 1 src",
-    "inspect": "phpstan analyse -l 4 -c phpstan.neon src --ansi"
+    "inspect": "phpstan analyse -l 7 -c phpstan.neon src --ansi"
   }
 }
