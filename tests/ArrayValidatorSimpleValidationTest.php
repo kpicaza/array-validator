@@ -51,6 +51,14 @@ class ArrayValidatorSimpleValidationTest extends TestCase
         'description' => 'notEmpty|minLength:40'
     ];
 
+
+    function testShouldThrownExceptionWhenRuleNotImplemented()
+    {
+        $this->expectException(\InvalidArgumentException::class);
+        ArrayValidator::check(self::VALID_VALUES_1, ['user_id' => 'inValidRule']);
+    }
+
+
     function testShouldDoNothingWithValidParameters()
     {
         ArrayValidator::check(self::VALID_VALUES_1, self::RULES_1);
