@@ -17,7 +17,7 @@ class ArrayValidator
                     $validation = explode(':', $validationRule);
                     $method = $validation[0];
                     $params = array_key_exists(1, $validation) ? $validation[1] : null;
-                    $ruleMethod = self::getRuleParams($method,  $params);
+                    $ruleMethod = self::getRuleParams($method, $params);
 
                     list($param1, $param2) = $ruleMethod[RuleParser::getRuleMethod($method)]($params);
 
@@ -28,15 +28,16 @@ class ArrayValidator
         });
     }
 
-    private static function getRuleParams(string $method, ?string $params): array {
+    private static function getRuleParams(string $method, ?string $params): array
+    {
         return [
-            'singleParam' => function() use ($method, $params) {
+            'singleParam' => function () use ($method, $params) {
                 return [
                     $params ? RuleParser::getRule($method, $params) : null,
                     null
                 ];
             },
-            'multipleParams' => function() use ($method, $params) {
+            'multipleParams' => function () use ($method, $params) {
                 return RuleParser::getRule($method, $params);
             },
         ];
