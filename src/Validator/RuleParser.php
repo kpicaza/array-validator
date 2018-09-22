@@ -16,7 +16,7 @@ class RuleParser
             'digit', // (mixed $value);
             'directory', // (string $value);
             'e164', // (string $value);
-            'email', // (mixed $value);
+            'email', // (mixed $value); DOCUMENTED
             'extensionLoaded', // (mixed $value);
             'false', // (mixed $value);
             'file', // (string $value);
@@ -33,7 +33,7 @@ class RuleParser
             'isTraversable', // (mixed $value);
             'noContent', // (mixed $value);
             'notBlank', // (mixed $value);
-            'notEmpty', // (mixed $value);
+            'notEmpty', // (mixed $value); DOCUMENTED
             'notNull', // (mixed $value);
             'null', // (mixed $value);
             'numeric', // (mixed $value);
@@ -45,11 +45,11 @@ class RuleParser
             'url', // (mixed $value);
             'uuid', // (string $value);
             'writeable', // (string $value);
-            'choice', // (mixed $value, array $choices);
+            'choice', // (mixed $value, array $choices); DOCUMENTED
             'choicesNotEmpty', // (array $values, array $choices);
             'contains', // (mixed $string, string $needle);
             'count', // (array|\Countable $countable, int $count);
-            'date', // (string $value, string $format);
+            'date', // (string $value, string $format); DOCUMENTED
             'endsWith', // (mixed $string, string $needle);
             'eq', // (mixed $value, mixed $value2);
             'greaterOrEqualThan', // (mixed $value, mixed $limit);
@@ -67,13 +67,13 @@ class RuleParser
             'lessOrEqualThan', // (mixed $value, mixed $limit);
             'lessThan', // (mixed $value, mixed $limit);
             'max', // (mixed $value, mixed $maxValue);
-            'maxLength', // (mixed $value, int $maxLength);
+            'maxLength', // (mixed $value, int $maxLength); DOCUMENTED
             'methodExists', // (string $value, mixed $object);
             'min', // (mixed $value, mixed $minValue);
-            'minLength', // (mixed $value, int $minLength);
+            'minLength', // (mixed $value, int $minLength); DOCUMENTED
             'notEmptyKey', // (mixed $value, string|int $key);
             'notEq', // (mixed $value1, mixed $value2);
-            'notInArray', // (mixed $value, array $choices);
+            'notInArray', // (mixed $value, array $choices); DOCUMENTED
             'notIsInstanceOf', // (mixed $value, string $className);
             'notSame', // (mixed $value1, mixed $value2);
             'phpVersion', // (string $operator, mixed $version);
@@ -88,7 +88,7 @@ class RuleParser
         'multipleParams' => [
             'between', // (mixed $value, mixed $lowerLimit, mixed $upperLimit);
             'betweenExclusive', // (mixed $value, mixed $lowerLimit, mixed $upperLimit);
-            'betweenLength', // (mixed $value, int $minLength, int $maxLength);
+            'betweenLength', // (mixed $value, int $minLength, int $maxLength); DOCUMENTED
             'extensionVersion', // (string $extension, string $operator, mixed $version);
             'range', // (mixed $value, mixed $minValue, mixed $maxValue);
             'version', // (string $version1, string $operator, string $version2);
