@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace Tests\Validator;
 
 use PHPUnit\Framework\TestCase;
+use PHPUnit\Runner\Exception;
 use Validator\ArrayValidator;
+use Validator\ValidationException;
 
 class ArrayValidatorSimpleValidationTest extends TestCase
 {
@@ -64,6 +66,21 @@ class ArrayValidatorSimpleValidationTest extends TestCase
         $params = self::VALID_VALUES_1;
         unset($params['user_id']);
         ArrayValidator::check($params, self::RULES_1);
+    }
+
+    function testValidationExceptionShouldHaveFieldAndError()
+    {
+        try {
+            $params = self::VALID_VALUES_1;
+            unset($params['user_id']);
+            ArrayValidator::check($params, self::RULES_1);
+        } catch (ValidationException $e) {
+            $this->assertTrue('user_id' === $e->error()['field']);
+
+            return;
+        }
+
+        throw new Exception('Expected exception was not thrown.');
     }
 
     function testShouldDoNothingWithValidParameters()
