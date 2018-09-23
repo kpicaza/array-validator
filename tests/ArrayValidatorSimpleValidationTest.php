@@ -58,6 +58,13 @@ class ArrayValidatorSimpleValidationTest extends TestCase
         ArrayValidator::check(self::VALID_VALUES_1, ['user_id' => 'inValidRule']);
     }
 
+    function testShouldThrownExceptionWhenEspectedParamDoNotExist()
+    {
+        $this->expectException(\InvalidArgumentException::class);
+        $params = self::VALID_VALUES_1;
+        unset($params['user_id']);
+        ArrayValidator::check($params, self::RULES_1);
+    }
 
     function testShouldDoNothingWithValidParameters()
     {
